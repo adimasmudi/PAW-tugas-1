@@ -71,7 +71,7 @@ if (isset($_POST['tambah'])) {
 
                     <form action="#" method="POST">
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="Nama" name="Nama">
+                            <input type="text" class="form-control form-control-xl" placeholder="Nama Barang" name="Nama" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
@@ -92,7 +92,7 @@ if (isset($_POST['tambah'])) {
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="number" class="form-control form-control-xl" placeholder="Nominal (Rp)" name="Nominal">
+                            <input type="number" class="form-control form-control-xl" placeholder="Nominal (Rp)" name="Nominal" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-cash-coin"></i>
                             </div>

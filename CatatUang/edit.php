@@ -81,7 +81,7 @@ if (isset($_POST["edit"])) {
                     <form action="edit.php" method="POST">
                         <input type="hidden" name="id" value="<?php echo $data["ID_catatan"]; ?>">
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="Nama" name="Nama" value="<?php echo $data["Nama_barang"]; ?>">
+                            <input type="text" class="form-control form-control-xl" placeholder="Nama Barang" name="Nama" value="<?php echo $data["Nama_barang"]; ?>" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
@@ -102,7 +102,7 @@ if (isset($_POST["edit"])) {
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="number" class="form-control form-control-xl" placeholder="Nominal (Rp)" name="Nominal" value="<?php echo $data["Nominal"]; ?>">
+                            <input type="number" class="form-control form-control-xl" placeholder="Nominal (Rp)" name="Nominal" value="<?php echo $data["Nominal"]; ?>" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-cash-coin"></i>
                             </div>

@@ -67,21 +67,21 @@ if (isset($_POST['daftar'])) {
                 <form action="signup.php" method="POST">
 
                     <div class="form-group position-relative has-icon-left mb-4 mt-4">
-                        <input type="text" class="form-control form-control-md" placeholder="Username" name="Username">
+                        <input type="text" class="form-control form-control-md" placeholder="Username" name="Username" required>
                         <div class="form-control-icon">
                             <i class="bi bi-person"></i>
                         </div>
                     </div>
 
                     <div class="form-group position-relative has-icon-left mb-4 mt-4">
-                        <input type="text" class="form-control form-control-md" placeholder="Nama" name="Nama">
+                        <input type="text" class="form-control form-control-md" placeholder="Nama" name="Nama" required>
                         <div class="form-control-icon">
                             <i class="bi bi-person"></i>
                         </div>
                     </div>
 
                     <div class="form-group position-relative has-icon-left mb-4 mt-4">
-                        <input type="text" class="form-control form-control-md" placeholder="Email" name="Email">
+                        <input type="text" class="form-control form-control-md" placeholder="Email" name="Email" required>
                         <div class="form-control-icon">
                             <i class="bi bi-at"></i>
                         </div>
@@ -89,7 +89,7 @@ if (isset($_POST['daftar'])) {
 
 
                     <div class="form-group position-relative has-icon-left mb-4">
-                        <input type="password" class="form-control form-control-md" placeholder="Password" name="Password">
+                        <input type="password" class="form-control form-control-md" placeholder="Password" name="Password" required>
                         <div class="form-control-icon">
                             <i class="bi bi-hash"></i>
                         </div>

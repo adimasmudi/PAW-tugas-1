@@ -139,11 +139,11 @@ $page_first_result = ($page - 1) * $results_per_page;
                                                         <td><?php echo $no; ?></td>
                                                         <td class="text-bold-500"><?php echo $data['Nama_barang']; ?></td>
                                                         <td><?php echo $data['Tanggal']; ?></td>
-                                                        <td class="text-bold-500"><?php echo $data['Jenis']; ?></td>
+                                                        <td class="text-bold-500 jenis"><?php echo $data['Jenis']; ?></td>
                                                         <td>Rp. <?php echo $data['Nominal']; ?></td>
                                                         <td><?php echo $data['Catatan']; ?></td>
                                                         <td>
-                                                            <a href="edit.php?id=<?php echo $data["ID_catatan"]; ?>" class="btn btn-success">Edit</a>
+                                                            <a href="edit.php?id=<?php echo $data["ID_catatan"]; ?>" class="btn btn-primary">Edit</a>
                                                             <a href="hapus.php?id=<?php echo $data["ID_catatan"]; ?>" class="btn btn-danger">Hapus</a>
                                                         </td>
 
@@ -195,6 +195,18 @@ $page_first_result = ($page - 1) * $results_per_page;
             <script src="assets/js/pages/dashboard.js"></script>
 
             <script src="assets/js/mazer.js"></script>
+            <script>
+                let jenis = document.querySelectorAll('.jenis');
+                jenis.forEach(el => {
+                    if (el.innerHTML === 'Pemasukan') {
+                        el.classList.add('text-success');
+                        el.classList.remove('text-danger');
+                    } else {
+                        el.classList.remove('text-success');
+                        el.classList.add('text-danger');
+                    }
+                })
+            </script>
 </body>
 
 </html>

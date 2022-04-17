@@ -68,7 +68,7 @@ if (isset($_POST['login'])) {
                 <form action="login.php" method="POST">
 
                     <div class="form-group position-relative has-icon-left mb-4 mt-4">
-                        <input type="text" class="form-control form-control-md" placeholder="Username" name="Username">
+                        <input type="text" class="form-control form-control-md" placeholder="Username" name="Username" required>
                         <div class="form-control-icon">
                             <i class="bi bi-person"></i>
                         </div>
@@ -76,7 +76,7 @@ if (isset($_POST['login'])) {
 
 
                     <div class="form-group position-relative has-icon-left mb-4">
-                        <input type="password" class="form-control form-control-md" placeholder="Password" name="Password">
+                        <input type="password" class="form-control form-control-md" placeholder="Password" name="Password" required>
                         <div class="form-control-icon">
                             <i class="bi bi-hash"></i>
                         </div>
