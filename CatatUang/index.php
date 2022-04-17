@@ -141,7 +141,7 @@ $page_first_result = ($page - 1) * $results_per_page;
                                                         <td><?php echo $data['Tanggal']; ?></td>
                                                         <td class="text-bold-500 jenis"><?php echo $data['Jenis']; ?></td>
                                                         <td>Rp. <?php echo $data['Nominal']; ?></td>
-                                                        <td><?php echo $data['Catatan']; ?></td>
+                                                        <td style="max-width:130px;"><?php echo $data['Catatan']; ?></td>
                                                         <td>
                                                             <a href="edit.php?id=<?php echo $data["ID_catatan"]; ?>" class="btn btn-primary">Edit</a>
                                                             <a href="hapus.php?id=<?php echo $data["ID_catatan"]; ?>" class="btn btn-danger">Hapus</a>
@@ -207,6 +207,7 @@ $page_first_result = ($page - 1) * $results_per_page;
                     }
                 })
             </script>
+
 </body>
 
 </html>

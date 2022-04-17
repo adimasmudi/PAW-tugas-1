@@ -1,54 +1,19 @@
 <?php
-
+// sambungkan dengan config
 require_once('config.php');
 require_once "auth.php";
 try {
     $id = $_GET['id'];
     $data = $db->query("SELECT * FROM catatan WHERE ID_catatan=$id")->fetch(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
-    echo 'e' . $e;
+    echo '';
 }
 
 
-if (isset($_POST["edit"])) {
-
-    $edit_id = $_POST['id'];
-
-    // ambil nama
-    $nama = filter_input(INPUT_POST, 'Nama', FILTER_SANITIZE_STRING);
-
-    // ambil datetime hari ini
-    $date = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
-
-    // format tanggalnya
-    $tanggal = $date->format('y-m-d H:i:s');
-
-    // Jenis
-    $jenis = $_POST["Jenis"];
-
-    // Nominal
-    $nominal = filter_input(INPUT_POST, 'Nominal', FILTER_VALIDATE_INT);
-
-    // Catatan
-    $catatan = filter_input(INPUT_POST, 'Catatan', FILTER_SANITIZE_STRING);
-
-    // query SQL untuk update table
-
-    $sql = "UPDATE catatan set Nama_barang=:nama, Tanggal=:tanggal, Jenis=:jenis, Nominal=:nominal, Catatan=:catatan WHERE ID_catatan=$edit_id";
 
 
-    $stmt = $db->prepare($sql);
 
-    $saved = $stmt->execute([
-        ":nama" => $nama,
-        ":tanggal" => $tanggal,
-        ":jenis" => $jenis,
-        ":nominal" => $nominal,
-        ":catatan" => $catatan
-    ]);
 
-    if ($saved) header('Location:index.php');
-}
 
 
 
@@ -66,6 +31,8 @@ if (isset($_POST["edit"])) {
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="stylesheet" href="assets/css/form.css">
+
+
 </head>
 
 <body>
@@ -78,7 +45,7 @@ if (isset($_POST["edit"])) {
                     <h1 class="auth-title">Edit</h1>
                     <p class="auth-subtitle mb-5">Edit Catatan Keuangan</p>
 
-                    <form action="edit.php" method="POST">
+                    <form action="edit_process.php" method="POST">
                         <input type="hidden" name="id" value="<?php echo $data["ID_catatan"]; ?>">
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" class="form-control form-control-xl" placeholder="Nama Barang" name="Nama" value="<?php echo $data["Nama_barang"]; ?>" required>
@@ -126,6 +93,8 @@ if (isset($_POST["edit"])) {
         </div>
 
     </div>
+
+
 </body>
 
 </html>

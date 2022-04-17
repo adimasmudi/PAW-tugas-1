@@ -1,36 +1,6 @@
 <?php
 require_once 'config.php';
 
-if (isset($_POST['login'])) {
-    $username = filter_input(INPUT_POST, 'Username', FILTER_SANITIZE_STRING);
-    $password = filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_STRING);
-
-    $sql = 'SELECT * FROM pengguna WHERE ID_pengguna=:username';
-
-    $stmt = $db->prepare($sql);
-
-    $stmt->execute([
-        ":username" => $username
-    ]);
-
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user) {
-        // verifikasi password
-        if (password_verify(trim($password), trim($user["Password"]))) {
-            // buat Session
-            session_start();
-            $_SESSION["user"] = $user;
-            // login sukses, alihkan ke halaman index pelanggan
-            header("Location: index.php");
-        } else {
-            echo '<script>Username atau password salah</script>';
-        }
-    } else {
-        echo '<script>Username atau password belum terdaftar</script>';
-    }
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,6 +20,12 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/app.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="assets/vendors/sweetalert2/sweetalert2.min.js"></script>
+
+
 </head>
 
 <body>
@@ -90,4 +66,83 @@ if (isset($_POST['login'])) {
             </div>
         </div>
     </div>
+
+    <?php
+    if (isset($_POST['login'])) {
+        $username = filter_input(INPUT_POST, 'Username', FILTER_SANITIZE_STRING);
+        $password = filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_STRING);
+
+        $sql = 'SELECT * FROM pengguna WHERE ID_pengguna=:username';
+
+        $stmt = $db->prepare($sql);
+
+        $stmt->execute([
+            ":username" => $username
+        ]);
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            // verifikasi password
+            if (password_verify(trim($password), trim($user["Password"]))) {
+                // buat Session
+                session_start();
+                $_SESSION["user"] = $user;
+                // login sukses, alihkan ke halaman index pelanggan
+                // header("Location: index.php");
+                echo "
+                        <script type='text/javascript'>
+                        setTimeout(function () {
+                            swal.fire(
+                            'Sukses',
+                            'Login Berhasil..',
+                            'success',
+                            
+                            ).then(function(){
+                                window.location.replace('index.php');
+                            });   
+                            },10);  
+                            
+                            
+                            
+                        </script>";
+            } else {
+                echo "
+                    <script type='text/javascript'>
+                    setTimeout(function () {
+                    swal.fire(
+                    'Error',
+                    'Username / Password Salah!',
+                    'error',
+                    
+                    ).then(function(){
+                        window.location.replace('login.php');
+                    });     
+                    },10);  
+                    
+                    </script>";
+            }
+        } else {
+            echo "
+                    <script type='text/javascript'>
+                    setTimeout(function () {
+                    swal.fire(
+                    'Error',
+                    'Username / Password belum terdaftar',
+                    'error',
+                    ).then(function(){
+                        window.location.replace('signup.php');
+                    });     
+                    },10);  
+                    
+                    </script>";
+        }
+    }
+    ?>
+
+
+
+
 </body>
+
+</html>

@@ -5,42 +5,7 @@ require_once "auth.php";
 
 $pengguna = $_GET["user"];
 
-// cek apakah sudah submit form
-if (isset($_POST['tambah'])) {
-    // ambil nama
-    $nama = filter_input(INPUT_POST, 'Nama', FILTER_SANITIZE_STRING);
 
-    // ambil datetime hari ini
-    $date = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
-
-    // format tanggalnya
-    $tanggal = $date->format('y-m-d H:i:s');
-
-    // Jenis
-    $jenis = $_POST["Jenis"];
-
-    // Nominal
-    $nominal = filter_input(INPUT_POST, 'Nominal', FILTER_VALIDATE_INT);
-
-    // Catatan
-    $catatan = filter_input(INPUT_POST, 'Catatan', FILTER_SANITIZE_STRING);
-
-
-    $sql = "INSERT into catatan (Nama_barang, Tanggal, Jenis, Nominal, Catatan, ID_pengguna) VALUES (:nama, :tanggal, :jenis, :nominal, :catatan, :id_pengguna)";
-
-    $stmt = $db->prepare($sql);
-
-    $saved = $stmt->execute([
-        ":nama" => $nama,
-        ":tanggal" => $tanggal,
-        ":jenis" => $jenis,
-        ":nominal" => $nominal,
-        ":catatan" => $catatan,
-        ":id_pengguna" => $pengguna
-    ]);
-
-    if ($saved) header('Location:index.php');
-}
 
 
 ?>
@@ -57,6 +22,10 @@ if (isset($_POST['tambah'])) {
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="stylesheet" href="assets/css/form.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="assets/vendors/sweetalert2/sweetalert2.min.js"></script>
 </head>
 
 <body>
@@ -116,6 +85,62 @@ if (isset($_POST['tambah'])) {
         </div>
 
     </div>
+
+    <?php
+    // cek apakah sudah submit form
+    if (isset($_POST['tambah'])) {
+        // ambil nama
+        $nama = filter_input(INPUT_POST, 'Nama', FILTER_SANITIZE_STRING);
+
+        // ambil datetime hari ini
+        $date = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
+
+        // format tanggalnya
+        $tanggal = $date->format('y-m-d H:i:s');
+
+        // Jenis
+        $jenis = $_POST["Jenis"];
+
+        // Nominal
+        $nominal = filter_input(INPUT_POST, 'Nominal', FILTER_VALIDATE_INT);
+
+        // Catatan
+        $catatan = filter_input(INPUT_POST, 'Catatan', FILTER_SANITIZE_STRING);
+
+
+        $sql = "INSERT into catatan (Nama_barang, Tanggal, Jenis, Nominal, Catatan, ID_pengguna) VALUES (:nama, :tanggal, :jenis, :nominal, :catatan, :id_pengguna)";
+
+        $stmt = $db->prepare($sql);
+
+        $saved = $stmt->execute([
+            ":nama" => $nama,
+            ":tanggal" => $tanggal,
+            ":jenis" => $jenis,
+            ":nominal" => $nominal,
+            ":catatan" => $catatan,
+            ":id_pengguna" => $pengguna
+        ]);
+
+        if ($saved) {
+            echo "
+                <script type='text/javascript'>
+                setTimeout(function () {
+                    swal.fire(
+                    'Sukses',
+                    'Berhasil ditambahkan!',
+                    'success',
+                    
+                    ).then(function(){
+                        window.location.replace('index.php');
+                    });   
+                    },10);  
+                    
+                    
+                    
+                </script>";
+        }
+    }
+    ?>
 </body>
 
 </html>
